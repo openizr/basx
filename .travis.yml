@@ -1,0 +1,28 @@
+language: node_js
+node_js:
+  - 12
+
+jobs:
+  include:
+    - stage: tests and code coverage
+      script: yarn run test && sed -i "s/\.\.\/\.\.\///g" coverage/lcov.info && ./node_modules/coveralls/bin/coveralls.js < coverage/lcov.info
+
+deploy:
+  # Deploys package on NPM
+  - provider: script
+    script: cp package.json package.json.bkp && sed -i "s/TRAVIS_TAG/$TRAVIS_TAG/g" package.json && yarn run build && npm publish ./dist
+    on:
+      tags: true
+  # Generates documentation
+  - provider: pages
+    skip_cleanup: true
+    keep_history: true
+    target_branch: master
+    github_token: $GITHUB_TOKEN
+    on:
+      tags: true
+
+before_deploy:
+  - yarn run doc
+  - touch docs/.nojekyll
+  - echo $'always-auth=true\n//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}' > .npmrc
