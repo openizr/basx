@@ -26,6 +26,9 @@
   "devDependencies": {
     "typescript-dev-kit": "^2.2.4"
   },
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
   "eslintConfig": {
     "extends": [
       "./node_modules/typescript-dev-kit/main.js"
