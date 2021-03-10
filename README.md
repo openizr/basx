@@ -21,7 +21,7 @@ yarn add basx
 // main.js
 // --------------------------
 
-import { deepMerge, deepCopy, i18n } from 'basx';
+import { deepMerge, deepCopy, i18n, requester } from 'basx';
 
 const objectA = {
   propA: {
@@ -47,6 +47,26 @@ console.log(mergedObject); // { propA: { propAA: 'test', propAB: 'test' }, propB
 
 const translate = i18n({ LABEL_HOME: "Welcome {{user}}!" });
 console.log(translate('LABEL_HOME', { user: 'Charles' })); // "Welcome Charles!"
+
+
+const request = requester({
+  baseUri: 'https://test.com',
+  shouldMock: (process.env.NODE_ENV !== 'production'),
+  mockedResponses: {
+    'GET /test': {
+      codes: [201, 401],
+      durations: [250, 300],
+      responses: [{ test: 'ok' }],
+    },
+  },
+});
+
+request({ endpoint: '/test', method: 'GET' }).then((response) => {
+  console.log(response); // Will be the real HTTP response in production mode, '{ "test": "ok" }' in any other mode
+});
+request({ endpoint: '/test', method: 'GET' }).catch((error) => {
+  console.log(error); // Will be the real HTTP error in production mode, '' in any other mode
+});
 ```
 
 
