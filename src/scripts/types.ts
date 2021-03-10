@@ -23,9 +23,9 @@ export interface Configuration {
   shouldMock: boolean;
   mockedResponses: {
     [key: string]: {
-      codes: number[];
-      responses: Json[];
-      durations: number[];
+      codes?: number[];
+      responses?: Json[];
+      durations?: number[];
     };
   };
 }
