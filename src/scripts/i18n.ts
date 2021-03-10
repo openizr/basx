@@ -9,9 +9,9 @@
 /**
  * Initializes the translation function from given labels.
  *
- * @param {Object} labels Set of labels for translation.
+ * @param {Record<string, string>} labels Set of labels for translation.
  *
- * @returns {(string, Object) => string} The actual translation function,
+ * @returns {(string, Record<string, string>) => string} The actual translation function,
  * accepting the following parameters:
  *  - `label`, the label to translate
  *  - `values`, the variables `key`- `value` mapping for replacement
