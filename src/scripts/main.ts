@@ -10,6 +10,7 @@
 
 import i18n from 'scripts/i18n';
 import requester from 'scripts/requester';
+import generateId from 'scripts/generateId';
 import { deepCopy, deepMerge, isPlainObject } from 'scripts/cloner';
 
 export {
@@ -17,5 +18,6 @@ export {
   deepCopy,
   deepMerge,
   requester,
+  generateId,
   isPlainObject,
 };
