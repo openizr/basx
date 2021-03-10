@@ -9,10 +9,10 @@
 import i18n from 'scripts/i18n';
 
 describe('i18n', () => {
-  const translate = i18n({ TEST_LABEL: 'TEST LABEL {{user}}' });
+  const translate = i18n({ TEST_LABEL: 'TEST LABEL {{user}} TEST TEST {{user}}' });
 
   test('should generate label from template and variables', () => {
-    expect(translate('TEST_LABEL', { user: 'dev' })).toBe('TEST LABEL dev');
+    expect(translate('TEST_LABEL', { user: 'dev' })).toBe('TEST LABEL dev TEST TEST dev');
   });
 
   test('should generate an empty label when calling with no argument', () => {

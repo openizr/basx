@@ -20,7 +20,7 @@ export default function i18n(labels: Record<string, string>) {
   return function translate(label = '', values: Record<string, string> = {}): string {
     let translation = labels[label] || label;
     Object.keys(values).forEach((key) => {
-      translation = translation.replace(`{{${key}}}`, values[key]);
+      translation = translation.replace(new RegExp(`{{${key}}}`, 'g'), values[key]);
     });
     return translation;
   };
