@@ -9,8 +9,13 @@
 /* istanbul ignore file */
 
 import i18n from 'scripts/i18n';
+import requester from 'scripts/requester';
 import { deepCopy, deepMerge, isPlainObject } from 'scripts/cloner';
 
 export {
-  deepCopy, deepMerge, i18n, isPlainObject,
+  i18n,
+  deepCopy,
+  deepMerge,
+  requester,
+  isPlainObject,
 };
