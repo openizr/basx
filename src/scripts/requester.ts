@@ -23,7 +23,8 @@ export default function requester(configuration: Configuration): Request {
 
     // Classic HTTP request.
     if (configuration.shouldMock === false) {
-      return axios.request({ ...options, url: `${configuration.baseUri}${endpoint}` });
+      return axios.request({ ...options, url: `${configuration.baseUri}${endpoint}` })
+        .then((response) => (response as { data: Json; }).data);
     }
 
     // Mocked HTTP request.
