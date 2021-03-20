@@ -41,7 +41,7 @@ describe('requester', () => {
       expect(console.log).toHaveBeenCalledTimes(2); // eslint-disable-line no-console
       expect(console.log).toHaveBeenCalledWith('[API CLIENT] Calling GET \'/test\' API endpoint...', '', ''); // eslint-disable-line no-console
       expect(console.log).toHaveBeenCalledWith('[API CLIENT] HTTP status code: 200, HTTP response: ', ''); // eslint-disable-line no-console
-      expect(response).toEqual('');
+      expect(response).toEqual({ data: '' });
     });
   });
 
