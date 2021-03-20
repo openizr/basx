@@ -7,5 +7,5 @@
  * axios client mock.
  */
 export default {
-  request: jest.fn(() => Promise.resolve()),
+  request: jest.fn(() => Promise.resolve({ data: '' })),
 };
