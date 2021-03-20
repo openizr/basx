@@ -72,7 +72,7 @@ const request = requester({
 });
 
 request({ endpoint: '/test', method: 'GET' }).then((response) => {
-  console.log(response); // Will be the real HTTP response in production mode, '{ "test": "ok" }' in any other mode
+  console.log(response); // Will be the real HTTP response in production mode, '{ data: { "test": "ok" } }' in any other mode
 });
 request({ endpoint: '/test', method: 'GET' }).catch((error) => {
   console.log(error); // Will be the real HTTP error in production mode, '' in any other mode
