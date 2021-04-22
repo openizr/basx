@@ -12,7 +12,6 @@ jobs:
         - sed -i "s/\.\.\/\.\.\///g" coverage/lcov.info
 
 before_deploy:
-  - cd library
   - yarn run doc
   - mv docs ../
   - touch ../docs/.nojekyll
