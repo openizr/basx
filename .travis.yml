@@ -15,14 +15,14 @@ before_deploy:
   - yarn run doc
   - mv docs ../
   - touch ../docs/.nojekyll
-  - echo $'always-auth=true\n//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}' > .npmrc
+  - npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
 
 # Only when deploying a new release
 deploy:
   # Deploys package on NPM
   - provider: script
     skip_cleanup: true
-    script: ls && yarn run build && sed -i "s/TRAVIS_TAG/$TRAVIS_TAG/g" ./dist/package.json
+    script: yarn run build && sed -i "s/TRAVIS_TAG/$TRAVIS_TAG/g" ./dist/package.json && ls dist
     #  && npm publish ./dist && rm .npmrc
     on:
       tags: true
