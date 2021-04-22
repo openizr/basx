@@ -13,7 +13,6 @@ jobs:
 
 before_deploy:
   - yarn run doc
-  - mv docs ../
   - touch ../docs/.nojekyll
   - npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
 
@@ -22,8 +21,8 @@ deploy:
   # Deploys package on NPM
   - provider: script
     skip_cleanup: true
-    script: yarn run build && sed -i "s/TRAVIS_TAG/$TRAVIS_TAG/g" ./dist/package.json && ls dist
-    #  && npm publish ./dist && rm .npmrc
+    script: yarn run build && cp ../README.md dist && cp ../LICENSE dist && sed -i "s/TRAVIS_TAG/$TRAVIS_TAG/g" ./dist/package.json && ls dist
+    #  && npm publish ./dist
     on:
       tags: true
   # Generates documentation
