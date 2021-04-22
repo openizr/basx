@@ -21,8 +21,7 @@ deploy:
   # Deploys package on NPM
   - provider: script
     skip_cleanup: true
-    script: yarn run build && cp ../README.md dist && cp ../LICENSE dist && sed -i "s/TRAVIS_TAG/$TRAVIS_TAG/g" ./dist/package.json && ls dist
-    #  && npm publish ./dist
+    script: yarn run build && cp ../README.md dist && cp ../LICENSE dist && sed -i "s/TRAVIS_TAG/$TRAVIS_TAG/g" ./dist/package.json && npm publish ./dist
     on:
       tags: true
   # Generates documentation
