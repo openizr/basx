@@ -1,15 +1,17 @@
 language: node_js
 node_js:
-  - 12
+  - 15
 
 jobs:
   include:
     - stage: tests and code coverage
       script:
+        - cd library
         - yarn run test
         - sed -i "s/\.\.\/\.\.\///g" coverage/lcov.info
 
 before_deploy:
+  - cd library
   - yarn run doc
   - touch docs/.nojekyll
   - echo $'always-auth=true\n//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}' > .npmrc
@@ -19,7 +21,7 @@ deploy:
   # Deploys package on NPM
   - provider: script
     skip_cleanup: true
-    script: cp package.json package.json.bkp && sed -i "s/TRAVIS_TAG/$TRAVIS_TAG/g" package.json && yarn run build && npm publish ./dist && rm package.json.bkp && rm .npmrc
+    script: ls && yarn run build && sed -i "s/TRAVIS_TAG/$TRAVIS_TAG/g" ./dist/package.json && npm publish ./dist && rm .npmrc
     on:
       tags: true
   # Generates documentation
@@ -33,4 +35,4 @@ deploy:
 
 # Coveralls is executed at the very end to prevent it from making deployment fail in case of error
 after_success:
-  - ./node_modules/coveralls/bin/coveralls.js < coverage/lcov.info
+  - ./library/node_modules/coveralls/bin/coveralls.js < coverage/lcov.info

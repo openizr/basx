@@ -14,6 +14,7 @@ jest.mock('axios');
 jest.useFakeTimers();
 
 console.log = jest.fn(); // eslint-disable-line no-console
+const { log } = console;
 
 describe('requester', () => {
   beforeEach(() => {
@@ -38,9 +39,9 @@ describe('requester', () => {
     jest.runAllTimers();
     promise.then((response) => {
       expect(axios.request).toHaveBeenCalledTimes(0);
-      expect(console.log).toHaveBeenCalledTimes(2); // eslint-disable-line no-console
-      expect(console.log).toHaveBeenCalledWith('[API CLIENT] Calling GET \'/test\' API endpoint...', '', ''); // eslint-disable-line no-console
-      expect(console.log).toHaveBeenCalledWith('[API CLIENT] HTTP status code: 200, HTTP response: ', ''); // eslint-disable-line no-console
+      expect(log).toHaveBeenCalledTimes(2);
+      expect(log).toHaveBeenCalledWith('[API CLIENT] Calling GET \'/test\' API endpoint...', '', '');
+      expect(log).toHaveBeenCalledWith('[API CLIENT] HTTP status code: 200, HTTP response: ', '');
       expect(response).toEqual({ data: '' });
     });
   });
@@ -61,9 +62,9 @@ describe('requester', () => {
     jest.runAllTimers();
     promise.catch((error) => {
       expect(axios.request).toHaveBeenCalledTimes(0);
-      expect(console.log).toHaveBeenCalledTimes(2); // eslint-disable-line no-console
-      expect(console.log).toHaveBeenCalledWith('[API CLIENT] Calling GET \'/test\' API endpoint...', '', ''); // eslint-disable-line no-console
-      expect(console.log).toHaveBeenCalledWith('[API CLIENT] HTTP status code: 401, HTTP response: ', { test: 'ok' }); // eslint-disable-line no-console
+      expect(log).toHaveBeenCalledTimes(2);
+      expect(log).toHaveBeenCalledWith('[API CLIENT] Calling GET \'/test\' API endpoint...', '', '');
+      expect(log).toHaveBeenCalledWith('[API CLIENT] HTTP status code: 401, HTTP response: ', { test: 'ok' });
       expect(error).toEqual(new HttpError({ data: { code: 401 } }));
     });
   });

@@ -9,6 +9,7 @@
 import i18n from 'scripts/i18n';
 
 console.warn = jest.fn(); // eslint-disable-line no-console
+const { warn } = console;
 
 describe('i18n', () => {
   let translate: (label: string, values?: Record<string, string>) => string;
@@ -24,12 +25,12 @@ describe('i18n', () => {
   test('should just return label name when label key does not exist in quiet mode', () => {
     translate = i18n({}, true);
     expect(translate('TEST_LABEL')).toBe('TEST_LABEL');
-    expect(console.warn).not.toHaveBeenCalled(); // eslint-disable-line no-console
+    expect(warn).not.toHaveBeenCalled();
   });
 
   test('should return label name and display a warning when label key does not exist in non-quiet mode', () => {
     expect(translate('TEST_LABEL_NEW')).toBe('TEST_LABEL_NEW');
-    expect(console.warn).toHaveBeenCalledTimes(1); // eslint-disable-line no-console
-    expect(console.warn).toHaveBeenCalledWith('No translation found for label "TEST_LABEL_NEW".'); // eslint-disable-line no-console
+    expect(warn).toHaveBeenCalledTimes(1);
+    expect(warn).toHaveBeenCalledWith('No translation found for label "TEST_LABEL_NEW".');
   });
 });

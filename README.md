@@ -4,8 +4,20 @@ A set of useful helpers for JS projects.
 
 [![Build Status](https://travis-ci.org/openizr/basx.svg?branch=master)](https://travis-ci.org/openizr/basx)
 [![Coverage Status](https://coveralls.io/repos/github/openizr/basx/badge.svg)](https://coveralls.io/github/openizr/basx)
-[![npm version](https://badge.fury.io/js/basx.svg)](https://badge.fury.io/js/basx)
+[![npm](https://img.shields.io/npm/v/basx.svg)](https://www.npmjs.com/package/basx)
+[![node](https://img.shields.io/node/v/basx.svg)](https://nodejs.org)
 [![Downloads](https://img.shields.io/npm/dm/basx.svg)](https://www.npmjs.com/package/basx)
+
+
+## Table of Contents
+
+1. [Installation](#Installation)
+2. [Usage](#Usage)
+3. [API documentation](#APIdocumentation)
+4. [Contributing](#Contributing)
+5. [Sponsor](#Sponsor)
+6. [Maintainers](#Maintainers)
+7. [License](#License)
 
 
 ## Installation
@@ -88,16 +100,38 @@ console.log(generateId()); // Something like '176d729689f90f9a132998217f7727d628
 
 ## API documentation
 
-You can find the full API documentation [here](https://openizr.github.io/basx)
+You can find the complete API documentation [here](https://openizr.github.io/basx)
 
 
 ## Contributing
 
-See the [Contribution guide](https://github.com/openizr/basx/blob/master/CONTRIBUTING.md)
+You're free to contribute to this project by submitting [issues](https://github.com/openizr/basx/issues) and/or [pull requests](https://github.com/openizr/basx/pulls). For more information, please read the [Contribution guide](https://github.com/openizr/basx/blob/master/CONTRIBUTING.md).
+
+
+## Sponsor
+
+Love this project and want to support it? You can [buy me a coffee](https://www.buymeacoffee.com/matthieujabbour) :)
+
+Or just sending me a quick message saying "Thanks" is also very gratifying, and keeps me motivated to maintain open-source projects I work on!
+
+
+## Maintainers
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <img width="150" height="150" src="https://avatars.githubusercontent.com/u/29428247?v=4&s=150">
+        </br>
+        <a href="https://github.com/matthieujabbour">Matthieu Jabbour</a>
+      </td>
+    </tr>
+  <tbody>
+</table>
 
 
 ## License
 
-[MIT](https://github.com/openizr/basx/blob/master/LICENSE)
+[MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) Matthieu Jabbour.
+Copyright (c) Matthieu Jabbour. All Rights Reserved.

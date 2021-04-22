@@ -8,12 +8,34 @@
 
 import axios from 'axios';
 import HttpError from 'scripts/__mocks__/HttpError';
-import { Json, Configuration, Request } from 'scripts/types';
+
+/** Any valid JavaScript primitive. */
+type Json = any; // eslint-disable-line @typescript-eslint/no-explicit-any
+type Request = (options: RequestOptions) => Promise<Json>;
+
+interface RequestOptions {
+  data?: Json;
+  endpoint: string;
+  method: 'POST' | 'GET' | 'PUT' | 'PATCH' | 'HEAD' | 'DELETE';
+  headers?: Record<string, string>;
+}
+
+interface Configuration {
+  baseUri: string;
+  shouldMock: boolean;
+  mockedResponses: {
+    [key: string]: {
+      codes?: number[];
+      responses?: Json[];
+      durations?: number[];
+    };
+  };
+}
 
 /**
  * Performs either an real AJAX with axios or a mocked request, depending on the configuration.
  *
- * @param {Settings} settings Requester's configuration.
+ * @param {Configuration} configuration Requester's configuration.
  *
  * @returns {Request} The actual request function.
  */

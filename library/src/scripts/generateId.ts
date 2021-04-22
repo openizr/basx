@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'scripts/typings';
-
 /**
  * Generates a no-collision, 40-chars, unique identifier.
  *

@@ -6,7 +6,8 @@
  *
  */
 
-import { Json } from 'scripts/types';
+/** Any valid JavaScript primitive. */
+type Json = any; // eslint-disable-line @typescript-eslint/no-explicit-any
 
 /**
  * Returns `true` if the given variable is a plain object, `false` otherwise.

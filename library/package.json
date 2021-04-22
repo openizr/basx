@@ -5,6 +5,7 @@
   "repository": "https://github.com/openizr/basx",
   "bugs": "https://github.com/openizr/basx/issues",
   "main": "./main.js",
+  "types": "./types.d.ts",
   "keywords": [
     "helpers",
     "library",
@@ -24,7 +25,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "typescript-dev-kit": "^2.2.4"
+    "typescript-dev-kit": "^3.0.5"
   },
   "dependencies": {
     "axios": "^0.21.1"
@@ -41,21 +42,22 @@
     },
     "srcPath": "src",
     "distPath": "dist",
-    "banner": "/**\n * Copyright (c) Matthieu Jabbour. All Rights Reserved.\n *\n * This source code is licensed under the MIT license found in the\n * LICENSE file in the root directory of this source tree.\n */",
+    "banner": "/*!\n * Copyright (c) Matthieu Jabbour. All Rights Reserved.\n *\n * This source code is licensed under the MIT license found in the\n * LICENSE file in the root directory of this source tree.\n */",
     "env": {
-      "development": {
-        "NODE_ENV": "\"development\""
-      },
-      "production": {
-        "NODE_ENV": "\"production\""
-      }
+      "development": {},
+      "production": {}
     }
+  },
+  "engines": {
+    "node": ">= 10.0.0",
+    "npm": ">= 5.0.0"
   },
   "scripts": {
     "init": "node_modules/typescript-dev-kit/scripts/init.sh",
     "dev": "cd node_modules/typescript-dev-kit/ && node scripts/dev",
-    "build": "cd node_modules/typescript-dev-kit/ && node scripts/build",
+    "build": "cd node_modules/typescript-dev-kit/ && node scripts/build && cp ../../src/scripts/types.d.ts ../../dist",
     "test": "cd node_modules/typescript-dev-kit/ && node scripts/test",
-    "doc": "node_modules/.bin/typedoc --out ./docs/ src/ --exclude \"**/__+(tests|mocks)__/**\""
+    "doc": "node_modules/.bin/typedoc --out ./doc/ --exclude \"**/*.js\" --exclude \"**/__+(tests|mocks)__/**\" src/",
+    "postinstall": "rm -f node_modules/.eslintcache"
   }
 }
