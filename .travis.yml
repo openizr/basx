@@ -14,7 +14,7 @@ jobs:
 before_deploy:
   - yarn run doc
   - touch ../docs/.nojekyll
-  - npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
+  - npm config set '//registry.npmjs.org/:_authToken' "${NPM_AUTH_TOKEN}"
 
 # Only when deploying a new release
 deploy:
