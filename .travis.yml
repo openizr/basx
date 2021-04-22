@@ -35,4 +35,4 @@ deploy:
 
 # Coveralls is executed at the very end to prevent it from making deployment fail in case of error
 after_success:
-  - yarn add coveralls && node_modules/coveralls/bin/coveralls.js < coverage/lcov.info
+  - node_modules/coveralls/bin/coveralls.js < coverage/lcov.info
