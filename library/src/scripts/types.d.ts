@@ -100,5 +100,5 @@ declare module 'basx' {
    *
    * @returns {Request} The actual request function.
    */
-  export default function requester(configuration: Configuration): Request;
+  export function requester(configuration: Configuration): Request;
 }
