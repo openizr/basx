@@ -42,18 +42,18 @@ interface Configuration {
 export default function requester(configuration: Configuration): Request {
   return (options): Promise<Json> => {
     const { endpoint, method, headers } = options;
+    const key = `${method} ${endpoint}`;
 
     // Classic HTTP request.
-    if (configuration.shouldMock === false) {
+    if (configuration.shouldMock === false || configuration.mockedResponses[key] === undefined) {
       return axios.request({ ...options, url: `${configuration.baseUri}${endpoint}` });
     }
 
     // Mocked HTTP request.
     return new Promise((resolve, reject) => {
-      const key = `${method} ${endpoint}`;
-      const statusCode = (configuration.mockedResponses[key]?.codes || [200]).splice(0, 1)[0];
-      const response = (configuration.mockedResponses[key]?.responses || ['']).splice(0, 1)[0];
-      const duration = (configuration.mockedResponses[key]?.durations || [500]).splice(0, 1)[0];
+      const statusCode = (configuration.mockedResponses[key].codes || [200]).splice(0, 1)[0];
+      const response = (configuration.mockedResponses[key].responses || ['']).splice(0, 1)[0];
+      const duration = (configuration.mockedResponses[key].durations || [500]).splice(0, 1)[0];
       // eslint-disable-next-line no-console
       console.log(`[API CLIENT] Calling ${method} '${endpoint}' API endpoint...`, headers || '', options.data || '');
       setTimeout(() => {

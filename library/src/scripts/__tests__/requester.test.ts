@@ -21,32 +21,47 @@ describe('requester', () => {
     jest.clearAllMocks();
   });
 
-  test('should perform a real AJAX request in real mode', () => {
+  test('should perform a real AJAX request in real mode', async () => {
     const request = requester({ baseUri: 'https://test.com', shouldMock: false, mockedResponses: {} });
-    request({ endpoint: '/test', method: 'GET' }).then(() => {
-      expect(axios.request).toHaveBeenCalledTimes(1);
-      expect(axios.request).toHaveBeenCalledWith({
-        endpoint: '/test',
-        url: 'https://test.com/test',
-        method: 'GET',
-      });
+    await request({ endpoint: '/test', method: 'GET' });
+    expect(axios.request).toHaveBeenCalledTimes(1);
+    expect(axios.request).toHaveBeenCalledWith({
+      endpoint: '/test',
+      url: 'https://test.com/test',
+      method: 'GET',
     });
   });
 
-  test('should perform a mocked AJAX request in fake mode (default response data)', () => {
+  test('should perform a real AJAX request in fake mode when endpoint is not mocked', async () => {
     const request = requester({ baseUri: 'https://test.com', shouldMock: true, mockedResponses: {} });
+    await request({ endpoint: '/test', method: 'GET' });
+    expect(axios.request).toHaveBeenCalledTimes(1);
+    expect(axios.request).toHaveBeenCalledWith({
+      endpoint: '/test',
+      url: 'https://test.com/test',
+      method: 'GET',
+    });
+  });
+
+  test('should perform a mocked AJAX request in fake mode (default response data)', async () => {
+    const request = requester({
+      baseUri: 'https://test.com',
+      shouldMock: true,
+      mockedResponses: {
+        'GET /test': {},
+      },
+    });
     const promise = request({ endpoint: '/test', method: 'GET' });
     jest.runAllTimers();
-    promise.then((response) => {
-      expect(axios.request).toHaveBeenCalledTimes(0);
-      expect(log).toHaveBeenCalledTimes(2);
-      expect(log).toHaveBeenCalledWith('[API CLIENT] Calling GET \'/test\' API endpoint...', '', '');
-      expect(log).toHaveBeenCalledWith('[API CLIENT] HTTP status code: 200, HTTP response: ', '');
-      expect(response).toEqual({ data: '' });
-    });
+    const response = await promise;
+    expect(axios.request).toHaveBeenCalledTimes(0);
+    expect(log).toHaveBeenCalledTimes(2);
+    expect(log).toHaveBeenCalledWith('[API CLIENT] Calling GET \'/test\' API endpoint...', '', '');
+    expect(log).toHaveBeenCalledWith('[API CLIENT] HTTP status code: 200, HTTP response: ', '');
+    expect(response).toEqual({ data: '' });
   });
 
-  test('should perform a mocked AJAX request in fake mode (custom response data)', () => {
+  test('should perform a mocked AJAX request in fake mode (custom response data)', async () => {
     const request = requester({
       baseUri: 'https://test.com',
       shouldMock: true,
@@ -58,14 +73,16 @@ describe('requester', () => {
         },
       },
     });
-    const promise = request({ endpoint: '/test', method: 'GET' });
-    jest.runAllTimers();
-    promise.catch((error) => {
+    try {
+      const promise = request({ endpoint: '/test', method: 'GET' });
+      jest.runAllTimers();
+      await promise;
+    } catch (error) {
       expect(axios.request).toHaveBeenCalledTimes(0);
       expect(log).toHaveBeenCalledTimes(2);
       expect(log).toHaveBeenCalledWith('[API CLIENT] Calling GET \'/test\' API endpoint...', '', '');
       expect(log).toHaveBeenCalledWith('[API CLIENT] HTTP status code: 401, HTTP response: ', { test: 'ok' });
       expect(error).toEqual(new HttpError({ data: { code: 401 } }));
-    });
+    }
   });
 });
