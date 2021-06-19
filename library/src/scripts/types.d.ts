@@ -6,23 +6,29 @@
  *
  */
 
+/** Any valid JavaScript primitive. */
+type Json = any; // eslint-disable-line @typescript-eslint/no-explicit-any
+
+interface PlainObject {
+  [key: string]: Json;
+}
+
+interface RequestOptions {
+  data?: Json;
+  endpoint: string;
+  method: 'POST' | 'GET' | 'PUT' | 'PATCH' | 'HEAD' | 'DELETE';
+  headers?: Record<string, string>;
+}
+
 declare module 'basx' {
-  /** Any valid JavaScript primitive. */
-  type Json = any; // eslint-disable-line @typescript-eslint/no-explicit-any
-
-  interface PlainObject {
-    [key: string]: Json;
-  }
-
-  interface RequestOptions {
-    data?: Json;
-    endpoint: string;
-    method: 'POST' | 'GET' | 'PUT' | 'PATCH' | 'HEAD' | 'DELETE';
-    headers?: Record<string, string>;
-  }
-
+  /**
+   * HTTP request.
+   */
   export type Request = (options: RequestOptions) => Promise<Json>;
 
+  /**
+   * Requester configuration.
+   */
   export interface Configuration {
     baseUri: string;
     shouldMock: boolean;
