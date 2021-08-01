@@ -20,8 +20,9 @@
  */
 export default function i18n(labels: Record<string, string>, quietMode = false) {
   return function translate(label: string, values: Record<string, string> = {}): string {
+    const { warn } = console;
     if (labels[label] === undefined && quietMode === false) {
-      console.warn(`No translation found for label "${label}".`); // eslint-disable-line no-console
+      warn(`No translation found for label "${label}".`);
     }
     let translation = labels[label] || label;
     Object.keys(values).forEach((key) => {
