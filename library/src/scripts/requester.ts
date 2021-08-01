@@ -6,21 +6,13 @@
  *
  */
 
-import axios from 'axios';
 import HttpError from 'scripts/__mocks__/HttpError';
+import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 
-/** Any valid JavaScript primitive. */
-type Json = any; // eslint-disable-line @typescript-eslint/no-explicit-any
-type Request = (options: RequestOptions) => Promise<Json>;
-
-interface RequestOptions {
-  data?: Json;
-  endpoint: string;
-  method: 'POST' | 'GET' | 'PUT' | 'PATCH' | 'HEAD' | 'DELETE';
-  headers?: Record<string, string>;
-}
-
-interface Configuration {
+/**
+ * Requester configuration.
+ */
+export interface RequesterConfiguration {
   baseUri: string;
   shouldMock: boolean;
   mockedResponses: {
@@ -33,14 +25,21 @@ interface Configuration {
 }
 
 /**
+ * Requester.
+ */
+export type Requester = <T = Json>(options: AxiosRequestConfig & {
+  endpoint: string;
+}) => Promise<AxiosResponse<T>>;
+
+/**
  * Performs either an real AJAX with axios or a mocked request, depending on the configuration.
  *
- * @param {Configuration} configuration Requester's configuration.
+ * @param {RequesterConfiguration} configuration Requester's configuration.
  *
- * @returns {Request} The actual request function.
+ * @returns {Requester} The actual request function.
  */
-export default function requester(configuration: Configuration): Request {
-  return (options): Promise<Json> => {
+export default function requester(configuration: RequesterConfiguration): Requester {
+  return <T>(options: AxiosRequestConfig & { endpoint: string; }): Promise<AxiosResponse<T>> => {
     const { endpoint, method, headers } = options;
     const key = `${method} ${endpoint}`;
 
@@ -61,7 +60,7 @@ export default function requester(configuration: Configuration): Request {
         console.log(`[API CLIENT] HTTP status code: ${statusCode}, HTTP response: `, response);
         return (statusCode > 300)
           ? reject(new HttpError({ data: { code: statusCode } }))
-          : resolve({ data: response });
+          : resolve({ data: response } as unknown as AxiosResponse<T>);
       }, duration);
     });
   };

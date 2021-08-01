@@ -8,9 +8,9 @@
 
 import { deepCopy, deepMerge, isPlainObject } from 'scripts/cloner';
 
-let obj = {};
-
 describe('extensions/cloner', () => {
+  let obj = {};
+
   beforeEach(() => {
     obj = {};
     jest.clearAllMocks();

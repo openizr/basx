@@ -13,10 +13,10 @@ import HttpError from 'scripts/__mocks__/HttpError';
 jest.mock('axios');
 jest.useFakeTimers();
 
-console.log = jest.fn(); // eslint-disable-line no-console
-const { log } = console;
-
 describe('requester', () => {
+  Object.assign(console, { log: jest.fn() });
+  const { log } = console;
+
   beforeEach(() => {
     jest.clearAllMocks();
   });

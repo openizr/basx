@@ -6,30 +6,22 @@
  *
  */
 
-/** Any valid JavaScript primitive. */
-type Json = any; // eslint-disable-line @typescript-eslint/no-explicit-any
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-interface PlainObject {
-  [key: string]: Json;
-}
-
-interface RequestOptions {
-  data?: Json;
-  endpoint: string;
-  method: 'POST' | 'GET' | 'PUT' | 'PATCH' | 'HEAD' | 'DELETE';
-  headers?: Record<string, string>;
-}
+type Json = string | number | boolean | null | Json[] | { [key: string]: Json };
 
 declare module 'basx' {
+  import { AxiosResponse, AxiosRequestConfig } from 'axios';
+
   /**
-   * HTTP request.
+   * Plain JavaScript object.
    */
-  export type Request = (options: RequestOptions) => Promise<Json>;
+  export type PlainObject = { [key: string]: Json };
 
   /**
    * Requester configuration.
    */
-  export interface Configuration {
+  export interface RequesterConfiguration {
     baseUri: string;
     shouldMock: boolean;
     mockedResponses: {
@@ -40,6 +32,13 @@ declare module 'basx' {
       };
     };
   }
+
+  /**
+   * Requester.
+   */
+  export type Requester = <T = Json>(options: AxiosRequestConfig & {
+    endpoint: string;
+  }) => Promise<AxiosResponse<T>>;
 
   /**
    * Generates a no-collision, 40-chars, unique identifier.
@@ -65,20 +64,20 @@ declare module 'basx' {
   /**
    * Returns `true` if the given variable is a plain object, `false` otherwise.
    *
-   * @param variable Variable to check against.
+   * @param {any} variable Variable to check against.
    *
-   * @returns `true` if the variable is a plain object, `false` otherwise.
+   * @returns {boolean} `true` if the variable is a plain object, `false` otherwise.
    */
-  export function isPlainObject(variable: Json): boolean;
+  export function isPlainObject(variable: any): boolean;
 
   /**
    * Performs a deep copy of a variable. Only plain objects and arrays are deeply copied.
    *
-   * @param {Json} variable Variable to deeply copy.
+   * @param {any} variable Variable to deeply copy.
    *
-   * @returns {Json} Variable's deep copy.
+   * @returns {any} Variable's deep copy.
    */
-  export function deepCopy(variable: Json): Json;
+  export function deepCopy<T = any>(variable: T): T;
 
   /**
    * Performs a deep merge of two plain objects. Only plain objects and arrays are deeply copied.
@@ -89,22 +88,22 @@ declare module 'basx' {
    *
    * @param {bool} [mergeArrays = false] Whether to merge objects arrays instead of replacing them.
    *
-   * @returns {PlainObject} A new object resulting of merging of the two others.
+   * @returns {any} A new object resulting of merging of the two others.
    *
    * @throws {Error} If one of the arguments is not a plain object.
    */
-  export function deepMerge(
-    firstObject: PlainObject,
-    secondObject: PlainObject,
-    mergeArrays = false,
-  ): PlainObject;
+  export function deepMerge<T1 = PlainObject, T2 = PlainObject>(
+    firstObject: T1,
+    secondObject: T2,
+    mergeArrays?: boolean,
+  ): T1 & T2;
 
   /**
    * Performs either an real AJAX with axios or a mocked request, depending on the configuration.
    *
-   * @param {Configuration} configuration Requester's configuration.
+   * @param {RequesterConfiguration} configuration Requester's configuration.
    *
-   * @returns {Request} The actual request function.
+   * @returns {Requester} The actual request function.
    */
-  export function requester(configuration: Configuration): Request;
+  export function requester(configuration: RequesterConfiguration): Requester;
 }

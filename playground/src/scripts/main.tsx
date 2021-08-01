@@ -1,4 +1,6 @@
-import { generateId } from 'basx';
+import {
+  generateId, deepCopy, deepMerge, isPlainObject,
+} from 'basx';
 
 // Webpack HMR interface.
 interface ExtendedNodeModule extends NodeModule {
@@ -6,7 +8,15 @@ interface ExtendedNodeModule extends NodeModule {
 }
 
 function main(): void {
+  const a = { key: 'test', arr: [1, new RegExp('')] };
+  const b = { key: 'new test', arr: ['ok'], other: 'test' };
+  const e = (): string => 'ok';
+  const c = deepCopy(a);
+  const f = deepCopy(e);
+  const d = deepMerge(a, b);
   console.log(generateId()); // eslint-disable-line no-console
+  console.log(isPlainObject('test')); // eslint-disable-line no-console
+  console.log(c, d, f, c === a, f === e); // eslint-disable-line no-console
 }
 
 // Ensures DOM is fully loaded before running app's main logic.

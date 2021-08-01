@@ -8,10 +8,10 @@
 
 import i18n from 'scripts/i18n';
 
-console.warn = jest.fn(); // eslint-disable-line no-console
-const { warn } = console;
-
 describe('i18n', () => {
+  Object.assign(console, { warn: jest.fn() });
+  const { warn } = console;
+
   let translate: (label: string, values?: Record<string, string>) => string;
 
   beforeEach(() => {
