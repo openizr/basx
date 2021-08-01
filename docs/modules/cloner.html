@@ -65,15 +65,6 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Copyright (c) Matthieu Jabbour. All Rights Reserved.</p>
-					</div>
-					<p>This source code is licensed under the MIT license found in the
-					LICENSE file in the root directory of this source tree.</p>
-				</div>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
@@ -81,9 +72,9 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="cloner.html#deepcopy" class="tsd-kind-icon">deep<wbr>Copy</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="cloner.html#deepmerge" class="tsd-kind-icon">deep<wbr>Merge</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="cloner.html#isplainobject" class="tsd-kind-icon">is<wbr>Plain<wbr>Object</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="cloner.html#deepcopy" class="tsd-kind-icon">deep<wbr>Copy</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="cloner.html#deepmerge" class="tsd-kind-icon">deep<wbr>Merge</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="cloner.html#isplainobject" class="tsd-kind-icon">is<wbr>Plain<wbr>Object</a></li>
 							</ul>
 						</section>
 					</div>
@@ -91,17 +82,17 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="deepcopy" class="tsd-anchor"></a>
 					<h3>deep<wbr>Copy</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">deep<wbr>Copy<span class="tsd-signature-symbol">(</span>variable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Json</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Json</span></li>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">deep<wbr>Copy&lt;T&gt;<span class="tsd-signature-symbol">(</span>variable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openizr/basx/blob/2231eeb/library/src/scripts/cloner.ts#L45">src/scripts/cloner.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/openizr/basx/blob/438d0f6/library/src/scripts/cloner.ts#L44">src/scripts/cloner.ts:44</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -109,31 +100,37 @@
 									<p>Performs a deep copy of a variable. Only plain objects and arrays are deeply copied.</p>
 								</div>
 							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>variable: <span class="tsd-signature-type">Json</span></h5>
+									<h5>variable: <span class="tsd-signature-type">T</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Variable to deeply copy.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Json</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 							<p>Variable&#39;s deep copy.</p>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="deepmerge" class="tsd-anchor"></a>
 					<h3>deep<wbr>Merge</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">deep<wbr>Merge<span class="tsd-signature-symbol">(</span>firstObject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Json</span><span class="tsd-signature-symbol">&gt;</span>, secondObject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Json</span><span class="tsd-signature-symbol">&gt;</span>, mergeArrays<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Json</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">deep<wbr>Merge&lt;T1, T2&gt;<span class="tsd-signature-symbol">(</span>firstObject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T1</span>, secondObject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T2</span>, mergeArrays<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">T2</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openizr/basx/blob/2231eeb/library/src/scripts/cloner.ts#L73">src/scripts/cloner.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/openizr/basx/blob/438d0f6/library/src/scripts/cloner.ts#L72">src/scripts/cloner.ts:72</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -146,16 +143,25 @@
 									</dd>
 								</dl>
 							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T1 = <span class="tsd-signature-type">PlainObject</span></h4>
+								</li>
+								<li>
+									<h4>T2 = <span class="tsd-signature-type">PlainObject</span></h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>firstObject: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Json</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>firstObject: <span class="tsd-signature-type">T1</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>First object.</p>
 									</div>
 								</li>
 								<li>
-									<h5>secondObject: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Json</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>secondObject: <span class="tsd-signature-type">T2</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Second object.</p>
 									</div>
@@ -164,22 +170,22 @@
 									<h5>mergeArrays: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Json</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T1</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">T2</span></h4>
 							<p>A new object resulting of merging of the two others.</p>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
 					<a name="isplainobject" class="tsd-anchor"></a>
 					<h3>is<wbr>Plain<wbr>Object</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Plain<wbr>Object<span class="tsd-signature-symbol">(</span>variable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Json</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Plain<wbr>Object&lt;T&gt;<span class="tsd-signature-symbol">(</span>variable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/openizr/basx/blob/2231eeb/library/src/scripts/cloner.ts#L19">src/scripts/cloner.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/openizr/basx/blob/438d0f6/library/src/scripts/cloner.ts#L19">src/scripts/cloner.ts:19</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -187,10 +193,16 @@
 									<p>Returns <code>true</code> if the given variable is a plain object, <code>false</code> otherwise.</p>
 								</div>
 							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>variable: <span class="tsd-signature-type">Json</span></h5>
+									<h5>variable: <span class="tsd-signature-type">T</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Variable to check against.</p>
 									</div>
@@ -231,13 +243,13 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-function tsd-parent-kind-module">
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="cloner.html#deepcopy" class="tsd-kind-icon">deep<wbr>Copy</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="cloner.html#deepmerge" class="tsd-kind-icon">deep<wbr>Merge</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="cloner.html#isplainobject" class="tsd-kind-icon">is<wbr>Plain<wbr>Object</a>
 					</li>
 				</ul>
@@ -250,8 +262,9 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
