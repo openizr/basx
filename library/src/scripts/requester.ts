@@ -50,14 +50,13 @@ export default function requester(configuration: RequesterConfiguration): Reques
 
     // Mocked HTTP request.
     return new Promise((resolve, reject) => {
+      const { log } = console;
       const statusCode = (configuration.mockedResponses[key].codes || [200]).splice(0, 1)[0];
       const response = (configuration.mockedResponses[key].responses || ['']).splice(0, 1)[0];
       const duration = (configuration.mockedResponses[key].durations || [500]).splice(0, 1)[0];
-      // eslint-disable-next-line no-console
-      console.log(`[API CLIENT] Calling ${method} '${endpoint}' API endpoint...`, headers || '', options.data || '');
+      log(`[API CLIENT] Calling ${method} '${endpoint}' API endpoint...`, headers || '', options.data || '');
       setTimeout(() => {
-        // eslint-disable-next-line no-console
-        console.log(`[API CLIENT] HTTP status code: ${statusCode}, HTTP response: `, response);
+        log(`[API CLIENT] HTTP status code: ${statusCode}, HTTP response: `, response);
         return (statusCode > 300)
           ? reject(new HttpError({ data: { code: statusCode } }))
           : resolve({ data: response } as unknown as AxiosResponse<T>);

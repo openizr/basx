@@ -6,8 +6,6 @@
  *
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 type Json = string | number | boolean | null | Json[] | { [key: string]: Json };
 
 declare module 'basx' {
@@ -68,7 +66,7 @@ declare module 'basx' {
    *
    * @returns {boolean} `true` if the variable is a plain object, `false` otherwise.
    */
-  export function isPlainObject(variable: any): boolean;
+  export function isPlainObject<T>(variable: T): boolean;
 
   /**
    * Performs a deep copy of a variable. Only plain objects and arrays are deeply copied.
@@ -77,7 +75,7 @@ declare module 'basx' {
    *
    * @returns {any} Variable's deep copy.
    */
-  export function deepCopy<T = any>(variable: T): T;
+  export function deepCopy<T>(variable: T): T;
 
   /**
    * Performs a deep merge of two plain objects. Only plain objects and arrays are deeply copied.

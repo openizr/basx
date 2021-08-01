@@ -21,13 +21,11 @@ describe('extensions/cloner', () => {
       expect(isPlainObject(2)).toBe(false);
     });
     test('should return `true` if variable has a modified constructor', () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (obj as any).constructor = undefined;
+      (obj as unknown as { constructor?: Json }).constructor = undefined;
       expect(isPlainObject(obj)).toBe(true);
     });
     test('should return `false` if variable has a modified constructor\'s prototype', () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (obj as any).constructor = {};
+      (obj as unknown as { constructor?: Json }).constructor = {};
       expect(isPlainObject(obj)).toBe(false);
     });
     test('should return `false` if variable has a modified constructor\'s prototype', () => {
@@ -80,8 +78,7 @@ describe('extensions/cloner', () => {
         thirdKey: [{ a: 'new' }],
       };
       expect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        deepMerge(firstObject as any, secondObject);
+        deepMerge(firstObject, secondObject);
       }).toThrow(new Error('Arguments must both be plain objects.'));
     });
 

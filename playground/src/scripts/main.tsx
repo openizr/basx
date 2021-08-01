@@ -8,15 +8,16 @@ interface ExtendedNodeModule extends NodeModule {
 }
 
 function main(): void {
+  const { log } = console;
   const a = { key: 'test', arr: [1, new RegExp('')] };
   const b = { key: 'new test', arr: ['ok'], other: 'test' };
   const e = (): string => 'ok';
   const c = deepCopy(a);
   const f = deepCopy(e);
   const d = deepMerge(a, b);
-  console.log(generateId()); // eslint-disable-line no-console
-  console.log(isPlainObject('test')); // eslint-disable-line no-console
-  console.log(c, d, f, c === a, f === e); // eslint-disable-line no-console
+  log(generateId());
+  log(isPlainObject(a));
+  log(c, d, f, c === a, f === e);
 }
 
 // Ensures DOM is fully loaded before running app's main logic.

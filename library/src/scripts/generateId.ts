@@ -15,7 +15,8 @@ export default function generateId(): string {
 
   // NodeJS environment...
   if (typeof window === 'undefined') {
-    const crypto = require('crypto'); // eslint-disable-line
+    const req = require;
+    const crypto = req('crypto');
     return `${timestamp}${crypto.randomBytes(15).toString('hex')}`;
   }
 

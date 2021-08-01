@@ -6,7 +6,6 @@
  *
  */
 
-type Any = any; // eslint-disable-line @typescript-eslint/no-explicit-any
 type PlainObject = { [key: string]: Json };
 type Json = string | number | boolean | null | Json[] | { [key: string]: Json };
 
@@ -17,11 +16,11 @@ type Json = string | number | boolean | null | Json[] | { [key: string]: Json };
  *
  * @returns `true` if the variable is a plain object, `false` otherwise.
  */
-export function isPlainObject(variable: Any): boolean {
+export function isPlainObject<T>(variable: T): boolean {
   if (Object.prototype.toString.call(variable) !== '[object Object]') {
     return false;
   }
-  const { constructor } = variable;
+  const { constructor } = variable as unknown as { constructor: ObjectConstructor };
   if (constructor === undefined) {
     return true;
   }
@@ -29,8 +28,7 @@ export function isPlainObject(variable: Any): boolean {
   if (Object.prototype.toString.call(prototype) !== '[object Object]') {
     return false;
   }
-  // eslint-disable-next-line no-prototype-builtins
-  if (prototype.hasOwnProperty('isPrototypeOf') === false) {
+  if (Object.prototype.hasOwnProperty.call(prototype, 'isPrototypeOf') === false) {
     return false;
   }
   return true;
@@ -43,17 +41,17 @@ export function isPlainObject(variable: Any): boolean {
  *
  * @returns {any} Variable's deep copy.
  */
-export function deepCopy<T = Any>(variable: T): T {
+export function deepCopy<T>(variable: T): T {
   if (isPlainObject(variable)) {
     return Object.keys(variable).reduce(
       (newObject, key) => Object.assign(newObject, {
-        [key]: deepCopy((<Any>variable)[key]),
+        [key]: deepCopy((variable as unknown as Record<string, Json>)[key]),
       }),
       <T>{},
     );
   }
   if (Array.isArray(variable)) {
-    return (<Any>variable).map(deepCopy);
+    return (variable as unknown as Json[]).map(deepCopy) as unknown as T;
   }
   return variable;
 }
@@ -79,17 +77,17 @@ export function deepMerge<T1 = PlainObject, T2 = PlainObject>(
   if (!isPlainObject(firstObject) || !isPlainObject(secondObject)) {
     throw new Error('Arguments must both be plain objects.');
   }
-  const newObject: Any = deepCopy(firstObject);
+  const newObject = deepCopy(firstObject) as unknown as PlainObject;
   Object.keys(secondObject).forEach((key) => {
-    const firstValue = (<Any>firstObject)[key];
-    const secondValue = (<Any>secondObject)[key];
+    const firstValue = (firstObject as unknown as PlainObject)[key];
+    const secondValue = (secondObject as unknown as PlainObject)[key];
     if (isPlainObject(firstValue) && isPlainObject(secondValue)) {
-      newObject[key] = deepMerge((<Any>firstObject)[key], (<Any>secondObject)[key]);
+      newObject[key] = deepMerge(firstValue, secondValue);
     } else if (Array.isArray(firstValue) && Array.isArray(secondValue) && mergeArrays) {
-      newObject[key] = newObject[key].concat(deepCopy(secondValue));
+      newObject[key] = (newObject[key] as unknown as Json[]).concat(deepCopy(secondValue));
     } else {
       newObject[key] = deepCopy(secondValue);
     }
   });
-  return <T1 & T2>newObject;
+  return newObject as unknown as T1 & T2;
 }
