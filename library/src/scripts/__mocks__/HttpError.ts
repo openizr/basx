@@ -4,12 +4,12 @@
  */
 
 /**
- * axios HTTP erros mock.
+ * axios HTTP error mock.
  */
 export default class HttpError extends Error {
-  public response: { data: { code: number }; };
+  public response: { data: Json; status: number; };
 
-  constructor(response: { data: { code: number; }; }) {
+  constructor(response: { data: Json; status: number; }) {
     super('HTTP Error');
     this.response = response;
   }

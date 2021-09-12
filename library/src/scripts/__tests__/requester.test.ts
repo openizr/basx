@@ -82,7 +82,7 @@ describe('requester', () => {
       expect(log).toHaveBeenCalledTimes(2);
       expect(log).toHaveBeenCalledWith('[API CLIENT] Calling GET \'/test\' API endpoint...', '', '');
       expect(log).toHaveBeenCalledWith('[API CLIENT] HTTP status code: 401, HTTP response: ', { test: 'ok' });
-      expect(error).toEqual(new HttpError({ data: { code: 401 } }));
+      expect(error).toEqual(new HttpError({ data: { test: 'ok' }, status: 401 }));
     }
   });
 });

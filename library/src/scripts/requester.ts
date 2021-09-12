@@ -58,7 +58,7 @@ export default function requester(configuration: RequesterConfiguration): Reques
       setTimeout(() => {
         log(`[API CLIENT] HTTP status code: ${statusCode}, HTTP response: `, response);
         return (statusCode > 300)
-          ? reject(new HttpError({ data: { code: statusCode } }))
+          ? reject(new HttpError({ data: response, status: statusCode }))
           : resolve({ data: response } as unknown as AxiosResponse<T>);
       }, duration);
     });
