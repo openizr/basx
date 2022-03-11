@@ -6,28 +6,32 @@
  *
  */
 
+type Any = any; // eslint-disable-line @typescript-eslint/no-explicit-any
+
+export type Locale = Record<string, Any>;
+
 /**
- * Initializes the translation function from given labels.
+ * Replaces `variables` keys by their values in the label, if they exist.
  *
- * @param {boolean} [quietMode = false] Whether to display a warning when a label is not found.
+ * @param {Record<string, string>} [variables] Variables to replace in the label.
  *
- * @param {Record<string, string>} labels Set of labels for translation.
- *
- * @returns {(string, Record<string, string>) => string} The actual translation function,
- * accepting the following parameters:
- *  - `label`, the label to translate
- *  - `values`, the variables `key`- `value` mapping for replacement
+ * @returns {string} Updated label.
  */
-export default function i18n(labels: Record<string, string>, quietMode = false) {
-  return function translate(label: string, values: Record<string, string> = {}): string {
-    const { warn } = console;
-    if (labels[label] === undefined && quietMode === false) {
-      warn(`No translation found for label "${label}".`);
-    }
-    let translation = labels[label] || label;
-    Object.keys(values).forEach((key) => {
-      translation = translation.replace(new RegExp(`{{${key}}}`, 'g'), values[key]);
-    });
-    return translation;
-  };
+function translate(this: string, variables: Record<string, string>): string {
+  let translation = `${this}`;
+  Object.keys(variables).forEach((key) => {
+    translation = translation.replace(new RegExp(`{{${key}}}`, 'g'), variables[key]);
+  });
+  return translation;
+}
+
+/**
+ * Initializes internationalization module.
+ *
+ * @returns {void}
+ */
+export default function i18n(): void {
+  if ((String.prototype as Any).t === undefined) {
+    (String.prototype as Any).t = translate;
+  }
 }

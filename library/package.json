@@ -5,6 +5,7 @@
   "repository": "https://github.com/openizr/basx",
   "bugs": "https://github.com/openizr/basx/issues",
   "main": "./main.js",
+  "type": "module",
   "types": "./types.d.ts",
   "keywords": [
     "helpers",
@@ -26,7 +27,7 @@
   "license": "MIT",
   "devDependencies": {
     "coveralls": "^3.1.1",
-    "typescript-dev-kit": "^5.0.0"
+    "typescript-dev-kit": "^5.0.5"
   },
   "dependencies": {
     "axios": "^0.26.1"
@@ -39,7 +40,10 @@
   "tsDevKitConfig": {
     "target": "node",
     "entries": {
-      "main": "./scripts/main.ts"
+      "main": "./scripts/main.ts",
+      "i18n": "./scripts/i18n.ts",
+      "cloner": "./scripts/cloner.ts",
+      "requester": "./scripts/requester.ts"
     },
     "srcPath": "src",
     "distPath": "dist",

@@ -6,31 +6,18 @@
  *
  */
 
-import i18n from 'scripts/i18n';
+import i18n, { Locale } from 'scripts/i18n';
 
 describe('i18n', () => {
-  Object.assign(console, { warn: jest.fn() });
-  const { warn } = console;
-
-  let translate: (label: string, values?: Record<string, string>) => string;
-
-  beforeEach(() => {
-    translate = i18n({ TEST_LABEL: 'TEST LABEL {{user}} TEST TEST {{user}}' });
+  test('should not change label if i18n is not imported', () => {
+    const locale: Locale = { TEST: 'test' };
+    expect(locale.TEST.t).toBe(undefined);
   });
 
-  test('should generate label from template and variables', () => {
-    expect(translate('TEST_LABEL', { user: 'dev' })).toBe('TEST LABEL dev TEST TEST dev');
-  });
-
-  test('should just return label name when label key does not exist in quiet mode', () => {
-    translate = i18n({}, true);
-    expect(translate('TEST_LABEL')).toBe('TEST_LABEL');
-    expect(warn).not.toHaveBeenCalled();
-  });
-
-  test('should return label name and display a warning when label key does not exist in non-quiet mode', () => {
-    expect(translate('TEST_LABEL_NEW')).toBe('TEST_LABEL_NEW');
-    expect(warn).toHaveBeenCalledTimes(1);
-    expect(warn).toHaveBeenCalledWith('No translation found for label "TEST_LABEL_NEW".');
+  test('should generate label from variables if i18n is imported', () => {
+    i18n();
+    const locale: Locale = { LABEL: 'TEST LABEL {{user}} TEST TEST {{user}}' };
+    expect(locale.LABEL.t({})).toBe('TEST LABEL {{user}} TEST TEST {{user}}');
+    expect(locale.LABEL.t({ user: 'dev' })).toBe('TEST LABEL dev TEST TEST dev');
   });
 });

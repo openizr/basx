@@ -6,15 +6,32 @@
  *
  */
 
+type Any = any; // eslint-disable-line @typescript-eslint/no-explicit-any
 type Json = string | number | boolean | null | Json[] | { [key: string]: Json };
 
 declare module 'basx' {
-  import { AxiosResponse, AxiosRequestConfig } from 'axios';
+  /**
+   * Generates a no-collision, 40-chars, unique identifier.
+   *
+   * @returns {string} Generated identifier.
+   */
+  export function generateId(): string;
+}
+
+declare module 'basx/i18n' {
+  /** List of labels for a specific language. */
+  export type Locale = Record<string, Any>;
 
   /**
-   * Plain JavaScript object.
+   * Initializes internationalization module.
+   *
+   * @returns {void}
    */
-  export type PlainObject = { [key: string]: Json };
+  export default function i18n(): void;
+}
+
+declare module 'basx/requester' {
+  import { AxiosResponse, AxiosRequestConfig } from 'axios';
 
   /**
    * Requester configuration.
@@ -39,43 +56,20 @@ declare module 'basx' {
   }) => Promise<AxiosResponse<T>>;
 
   /**
-   * Generates a no-collision, 40-chars, unique identifier.
+   * Performs either an real AJAX with axios or a mocked request, depending on the configuration.
    *
-   * @returns {string} Generated identifier.
+   * @param {RequesterConfiguration} configuration Requester's configuration.
+   *
+   * @returns {Requester} The actual request function.
    */
-  export function generateId(): string;
+  export function requester(configuration: RequesterConfiguration): Requester;
+}
 
+declare module 'basx/cloner' {
   /**
-   * Initializes the translation function from given labels.
-   *
-   * @param {boolean} [quietMode = false] Whether to display a warning when a label is not found.
-   *
-   * @param {Record<string, string>} labels Set of labels for translation.
-   *
-   * @returns {(string, Record<string, string>) => string} The actual translation function,
-   * accepting the following parameters:
-   *  - `label`, the label to translate
-   *  - `values`, the variables `key`- `value` mapping for replacement
+   * Plain JavaScript object.
    */
-  export function i18n(labels: Record<string, string>, quietMode = false);
-
-  /**
-   * Returns `true` if the given variable is a plain object, `false` otherwise.
-   *
-   * @param {any} variable Variable to check against.
-   *
-   * @returns {boolean} `true` if the variable is a plain object, `false` otherwise.
-   */
-  export function isPlainObject<T>(variable: T): boolean;
-
-  /**
-   * Performs a deep copy of a variable. Only plain objects and arrays are deeply copied.
-   *
-   * @param {any} variable Variable to deeply copy.
-   *
-   * @returns {any} Variable's deep copy.
-   */
-  export function deepCopy<T>(variable: T): T;
+  export type PlainObject = { [key: string]: Json };
 
   /**
    * Performs a deep merge of two plain objects. Only plain objects and arrays are deeply copied.
@@ -97,11 +91,20 @@ declare module 'basx' {
   ): T1 & T2;
 
   /**
-   * Performs either an real AJAX with axios or a mocked request, depending on the configuration.
+   * Returns `true` if the given variable is a plain object, `false` otherwise.
    *
-   * @param {RequesterConfiguration} configuration Requester's configuration.
+   * @param {any} variable Variable to check against.
    *
-   * @returns {Requester} The actual request function.
+   * @returns {boolean} `true` if the variable is a plain object, `false` otherwise.
    */
-  export function requester(configuration: RequesterConfiguration): Requester;
+  export function isPlainObject<T>(variable: T): boolean;
+
+  /**
+   * Performs a deep copy of a variable. Only plain objects and arrays are deeply copied.
+   *
+   * @param {any} variable Variable to deeply copy.
+   *
+   * @returns {any} Variable's deep copy.
+   */
+  export function deepCopy<T>(variable: T): T;
 }

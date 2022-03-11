@@ -6,18 +6,21 @@
  *
  */
 
-/* istanbul ignore file */
+/**
+ * Generates a no-collision, 40-chars, unique identifier.
+ *
+ * @returns {string} Generated identifier.
+ */
+export function generateId(): string { // eslint-disable-line import/prefer-default-export
+  const timestamp = Date.now().toString(16).slice(0, 10);
 
-import i18n from 'scripts/i18n';
-import requester from 'scripts/requester';
-import generateId from 'scripts/generateId';
-import { deepCopy, deepMerge, isPlainObject } from 'scripts/cloner';
+  // NodeJS environment...
+  if (typeof window === 'undefined') {
+    const req = require;
+    const crypto = req('crypto');
+    return `${timestamp}${crypto.randomBytes(15).toString('hex')}`;
+  }
 
-export {
-  i18n,
-  deepCopy,
-  deepMerge,
-  requester,
-  generateId,
-  isPlainObject,
-};
+  // Browser environment...
+  return `${timestamp}${Array.prototype.map.call(window.crypto.getRandomValues(new Uint32Array(4)), (uint) => uint.toString(16)).join('')}`.slice(0, 40);
+}
