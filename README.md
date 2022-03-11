@@ -29,15 +29,25 @@ yarn add basx
 
 ## Usage
 
+### basx
+
 ```typescript
 // main.js
 // --------------------------
 
-import { deepMerge, deepCopy, i18n, requester, generateId } from 'basx';
+import generateId from 'basx';
 
-/*
- * deepCopy, deepMerge
- */
+console.log(generateId()); // Something like '176d729689f90f9a132998217f7727d628f0f9a4'
+```
+
+### basx/cloner
+
+```typescript
+// main.js
+// --------------------------
+
+import { deepMerge, deepCopy } from 'basx/cloner';
+
 const objectA = {
   propA: {
     propAA: 'test',
@@ -59,18 +69,30 @@ console.log(objectA === objectACopy, objectA.propA === objectACopy.propA); // fa
 
 const mergedObject = deepMerge(objectA, objectB);
 console.log(mergedObject); // { propA: { propAA: 'test', propAB: 'test' }, propB: ['test, 'testB'], propC: 'testB' }
+```
 
+### basx/i18n
 
-/*
- * i18n
- */
-const translate = i18n({ LABEL_HOME: "Welcome {{user}}!" });
-console.log(translate('LABEL_HOME', { user: 'Charles' })); // "Welcome Charles!"
+```typescript
+// main.js
+// --------------------------
 
+import i18n from 'basx/i18n';
 
-/*
- * requester
- */
+i18n();
+const locale = { LABEL_ANONYMOUS: "Welcome anonymous!", LABEL_HOME: "Welcome {{user}}!" };
+console.log(locale.LABEL_ANONYMOUS); // "Welcome anonymous!"
+console.log(locale.LABEL_HOME.t({ user: 'Charles' })); // "Welcome Charles!"
+```
+
+### basx/requester
+
+```typescript
+// main.js
+// --------------------------
+
+import requester from 'basx/requester';
+
 const request = requester({
   baseUri: 'https://test.com',
   shouldMock: (process.env.NODE_ENV !== 'production'),
@@ -89,12 +111,6 @@ request({ endpoint: '/test', method: 'GET' }).then((response) => {
 request({ endpoint: '/test', method: 'GET' }).catch((error) => {
   console.log(error); // Will be the real HTTP error in production mode, '' in any other mode
 });
-
-
-/*
- * generateId
- */
-console.log(generateId()); // Something like '176d729689f90f9a132998217f7727d628f0f9a4'
 ```
 
 
