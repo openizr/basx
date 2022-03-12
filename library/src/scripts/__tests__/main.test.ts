@@ -6,9 +6,9 @@
  *
  */
 
-import { deepCopy, deepMerge, isPlainObject } from 'scripts/cloner';
+import { deepCopy, deepMerge, isPlainObject } from 'scripts/main';
 
-describe('extensions/cloner', () => {
+describe('main', () => {
   let obj = {};
 
   beforeEach(() => {

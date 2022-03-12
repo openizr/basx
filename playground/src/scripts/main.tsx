@@ -1,23 +1,21 @@
-import {
-  generateId, deepCopy, deepMerge, isPlainObject,
-} from 'basx';
+import i18n, { Locale } from 'basx/i18n';
+import { deepCopy, deepMerge, isPlainObject } from 'basx';
 
-// Webpack HMR interface.
-interface ExtendedNodeModule extends NodeModule {
-  hot: { accept: () => void };
-}
+i18n();
+const locale: Locale = { TEST_LABEL: 'Label test {{user}}' };
 
 function main(): void {
   const { log } = console;
-  const a = { key: 'test', arr: [1, new RegExp('')] };
+  const a = { key: 'test', arr: [1, new RegExp('')] }; // eslint-disable-line prefer-regex-literals
   const b = { key: 'new test', arr: ['ok'], other: 'test' };
   const e = (): string => 'ok';
   const c = deepCopy(a);
   const f = deepCopy(e);
   const d = deepMerge(a, b);
-  log(generateId());
   log(isPlainObject(a));
   log(c, d, f, c === a, f === e);
+  log(locale.TEST_LABEL);
+  log(locale.TEST_LABEL.t({ user: 'John' }));
 }
 
 // Ensures DOM is fully loaded before running app's main logic.
@@ -27,9 +25,4 @@ if (document.readyState === 'loading') {
   // `DOMContentLoaded` has already fired...
 } else {
   main();
-}
-
-// Enables Hot Module Rendering.
-if ((module as ExtendedNodeModule).hot) {
-  (module as ExtendedNodeModule).hot.accept();
 }

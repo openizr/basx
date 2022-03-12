@@ -4,6 +4,7 @@
   "description": "A set of useful helpers for JS projects",
   "repository": "https://github.com/openizr/basx",
   "bugs": "https://github.com/openizr/basx/issues",
+  "type": "module",
   "main": "./main.js",
   "types": "./types.d.ts",
   "keywords": [
@@ -26,10 +27,10 @@
   "license": "MIT",
   "devDependencies": {
     "coveralls": "^3.1.1",
-    "typescript-dev-kit": "^3.1.0"
+    "typescript-dev-kit": "^5.0.5"
   },
   "dependencies": {
-    "axios": "^0.21.4"
+    "axios": "^0.26.1"
   },
   "eslintConfig": {
     "extends": [
@@ -38,8 +39,10 @@
   },
   "tsDevKitConfig": {
     "target": "node",
-    "entry": {
-      "main": "./scripts/main.ts"
+    "entries": {
+      "i18n": "./scripts/i18n.ts",
+      "main": "./scripts/main.ts",
+      "requester": "./scripts/requester.ts"
     },
     "srcPath": "src",
     "distPath": "dist",
@@ -50,15 +53,16 @@
     }
   },
   "engines": {
-    "node": ">= 10.0.0",
-    "npm": ">= 5.0.0"
+    "node": ">= 14.0.0",
+    "npm": ">= 7.0.0"
   },
   "scripts": {
     "init": "node_modules/typescript-dev-kit/scripts/init.sh",
     "dev": "cd node_modules/typescript-dev-kit/ && node scripts/dev",
     "build": "cd node_modules/typescript-dev-kit/ && node scripts/build && cp ../../src/scripts/types.d.ts ../../dist",
     "test": "cd node_modules/typescript-dev-kit/ && node scripts/test",
-    "doc": "node_modules/.bin/typedoc --out ../docs/ --exclude \"**/*.js\" --exclude \"**/__+(tests|mocks)__/**\" src/",
+    "check": "cd node_modules/typescript-dev-kit/ && node scripts/check",
+    "doc": "typedoc --out ../docs/ --exclude \"**/*.js\" --exclude \"**/__+(tests|mocks)__/**\" src/",
     "postinstall": "rm -f node_modules/.eslintcache"
   }
 }
