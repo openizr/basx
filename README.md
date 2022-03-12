@@ -35,18 +35,7 @@ yarn add basx
 // main.js
 // --------------------------
 
-import generateId from 'basx';
-
-console.log(generateId()); // Something like '176d729689f90f9a132998217f7727d628f0f9a4'
-```
-
-### basx/cloner
-
-```typescript
-// main.js
-// --------------------------
-
-import { deepMerge, deepCopy } from 'basx/cloner';
+import { deepMerge, deepCopy } from 'basx';
 
 const objectA = {
   propA: {

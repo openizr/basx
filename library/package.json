@@ -4,8 +4,8 @@
   "description": "A set of useful helpers for JS projects",
   "repository": "https://github.com/openizr/basx",
   "bugs": "https://github.com/openizr/basx/issues",
-  "main": "./main.js",
   "type": "module",
+  "main": "./main.js",
   "types": "./types.d.ts",
   "keywords": [
     "helpers",
@@ -40,9 +40,8 @@
   "tsDevKitConfig": {
     "target": "node",
     "entries": {
-      "main": "./scripts/main.ts",
       "i18n": "./scripts/i18n.ts",
-      "cloner": "./scripts/cloner.ts",
+      "main": "./scripts/main.ts",
       "requester": "./scripts/requester.ts"
     },
     "srcPath": "src",

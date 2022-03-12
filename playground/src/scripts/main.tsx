@@ -1,6 +1,5 @@
-import { generateId } from 'basx';
 import i18n, { Locale } from 'basx/i18n';
-import { deepCopy, deepMerge, isPlainObject } from 'basx/cloner';
+import { deepCopy, deepMerge, isPlainObject } from 'basx';
 
 i18n();
 const locale: Locale = { TEST_LABEL: 'Label test {{user}}' };
@@ -13,7 +12,6 @@ function main(): void {
   const c = deepCopy(a);
   const f = deepCopy(e);
   const d = deepMerge(a, b);
-  log(generateId());
   log(isPlainObject(a));
   log(c, d, f, c === a, f === e);
   log(locale.TEST_LABEL);
