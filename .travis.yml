@@ -12,9 +12,8 @@ jobs:
         - sed -i "s/\.\.\/\.\.\///g" coverage/lcov.info
 
 before_deploy:
-  - rm -rf docs
   - yarn run doc
-  - touch docs/.nojekyll
+  - touch ../docs/.nojekyll
   - npm config set '//registry.npmjs.org/:_authToken' "${NPM_AUTH_TOKEN}"
 
 # Only when deploying a new release

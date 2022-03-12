@@ -62,7 +62,7 @@
     "build": "cd node_modules/typescript-dev-kit/ && node scripts/build && cp ../../src/scripts/types.d.ts ../../dist",
     "test": "cd node_modules/typescript-dev-kit/ && node scripts/test",
     "check": "cd node_modules/typescript-dev-kit/ && node scripts/check",
-    "doc": "typedoc --out docs --exclude \"**/*.js\" --exclude \"**/__+(tests|mocks)__/**\" src/scripts/main.ts src/scripts/i18n.ts src/scripts/requester.ts",
+    "doc": "typedoc --out ../docs --exclude \"**/*.js\" --exclude \"**/__+(tests|mocks)__/**\" src/scripts/main.ts src/scripts/i18n.ts src/scripts/requester.ts",
     "postinstall": "rm -f node_modules/.eslintcache"
   }
 }
