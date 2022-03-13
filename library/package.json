@@ -6,7 +6,7 @@
   "bugs": "https://github.com/openizr/basx/issues",
   "type": "module",
   "main": "./main.js",
-  "types": "./types.d.ts",
+  "types": "./main.d.ts",
   "keywords": [
     "helpers",
     "library",
@@ -59,9 +59,10 @@
   "scripts": {
     "init": "node_modules/typescript-dev-kit/scripts/init.sh",
     "dev": "cd node_modules/typescript-dev-kit/ && node scripts/dev",
-    "build": "cd node_modules/typescript-dev-kit/ && node scripts/build && cp ../../src/scripts/types.d.ts ../../dist",
+    "build": "cd node_modules/typescript-dev-kit/ && node scripts/build && cd ../../ && yarn run types",
     "test": "cd node_modules/typescript-dev-kit/ && node scripts/test",
     "check": "cd node_modules/typescript-dev-kit/ && node scripts/check",
+    "types": "rsync -a --prune-empty-dirs --include '*/' --include '*.d.ts' --exclude '*' src/scripts/ dist/",
     "doc": "typedoc --out ../docs --exclude \"**/*.js\" --exclude \"**/__+(tests|mocks)__/**\" src/scripts/main.ts src/scripts/i18n.ts src/scripts/requester.ts",
     "postinstall": "rm -f node_modules/.eslintcache"
   }
