@@ -1,4 +1,7 @@
-# basx
+# ⚠️ Please use [@perseid/core](https://www.npmjs.com/package/@perseid/core) instead
+
+This NPM package is deprecated and no longer maintained.
+[@perseid/store](https://github.com/openizr/perseid/tree/main/core) is the new official repository.
 
 A set of useful helpers for JS projects.
 
